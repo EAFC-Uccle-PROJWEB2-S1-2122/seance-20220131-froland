@@ -57,11 +57,11 @@ const App = () => {
   );
 };
 
-const InputWithLabel = ({ id, label, value, onInputChange }) => {
+const InputWithLabel = ({ id, label, value, type = "text", onInputChange }) => {
   return (
     <>
       <label htmlFor={id}>{label}</label>
-      <input id={id} type="text" value={value} onChange={onInputChange} />
+      <input id={id} type={type} value={value} onChange={onInputChange} />
     </>
   );
 };
