@@ -69,6 +69,8 @@ const storiesReducer = (state, action) => {
   }
 };
 
+const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
+
 const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
   const [stories, dispatchStories] = useReducer(storiesReducer, {
@@ -80,11 +82,12 @@ const App = () => {
   useEffect(() => {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
-    getAsyncStories()
+    fetch(`${API_ENDPOINT}react`)
+      .then((response) => response.json())
       .then((result) => {
         dispatchStories({
           type: "STORIES_FETCH_SUCCESS",
-          payload: result.data.stories,
+          payload: result.hits,
         });
       })
       .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
