@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const initialStories = [
+  {
+    title: "React",
+    url: "https://reactjs.org",
+    author: "Jordan Walke",
+    num_comments: 3,
+    points: 4,
+    objectID: 0,
+  },
+  {
+    title: "Redux",
+    url: "https://redux.js.org",
+    author: "Dan Abramov, Andrew Clark",
+    num_comments: 2,
+    points: 5,
+    objectID: 1,
+  },
+];
 
 const useSemiPersistentState = (key, initialValue) => {
-  const [value, setValue] = React.useState(
-    localStorage.getItem(key) || initialValue
-  );
+  const [value, setValue] = useState(localStorage.getItem(key) || initialValue);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem(key, value);
   }, [key, value]);
 
@@ -13,26 +30,8 @@ const useSemiPersistentState = (key, initialValue) => {
 };
 
 const App = () => {
-  const stories = [
-    {
-      title: "React",
-      url: "https://reactjs.org",
-      author: "Jordan Walke",
-      num_comments: 3,
-      points: 4,
-      objectID: 0,
-    },
-    {
-      title: "Redux",
-      url: "https://redux.js.org",
-      author: "Dan Abramov, Andrew Clark",
-      num_comments: 2,
-      points: 5,
-      objectID: 1,
-    },
-  ];
-
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
+  const [stories, setStories] = useState(initialStories);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
