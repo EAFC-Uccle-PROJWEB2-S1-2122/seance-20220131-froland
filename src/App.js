@@ -33,6 +33,14 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
   const [stories, setStories] = useState(initialStories);
 
+  const handleRemoveStory = (item) => {
+    const newStories = stories.filter(
+      (story) => item.objectID !== story.objectID
+    );
+
+    setStories(newStories);
+  };
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -52,7 +60,7 @@ const App = () => {
         <strong>Search: </strong>
       </InputWithLabel>
       <hr />
-      <List list={searchedStories} />
+      <List list={searchedStories} onRemoveItem={handleRemoveStory} />
     </div>
   );
 };
@@ -72,15 +80,15 @@ const InputWithLabel = ({
   );
 };
 
-const List = ({ list }) => (
+const List = ({ list, onRemoveItem }) => (
   <ul>
     {list.map((elem) => (
-      <Item key={elem.objectID} item={elem} />
+      <Item key={elem.objectID} item={elem} onRemoveItem={onRemoveItem} />
     ))}
   </ul>
 );
 
-const Item = ({ item }) => (
+const Item = ({ item, onRemoveItem }) => (
   <li>
     <span>
       <a href={item.url}>{item.title}</a>{" "}
@@ -88,6 +96,11 @@ const Item = ({ item }) => (
     <span>{item.author} </span>
     <span>{item.num_comments} </span>
     <span>{item.points}</span>
+    <span>
+      <button type="button" onClick={() => onRemoveItem(item)}>
+        Dismiss
+      </button>
+    </span>
   </li>
 );
 
