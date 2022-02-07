@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import axios from "axios";
-import "./App.css";
+import styles from "./App.module.css";
 import List from "./List";
 import InputWithLabel from "./InputWithLabel";
 
@@ -87,7 +87,7 @@ const App = () => {
   };
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1 className="headline-primary">My Hacker Stories</h1>
       <InputWithLabel
         id="search"
@@ -99,7 +99,7 @@ const App = () => {
       <button
         type="button"
         disabled={!searchTerm}
-        className="button button_large"
+        className="button bottonLarge"
         onClick={handleSearchSubmit}
       >
         Submit

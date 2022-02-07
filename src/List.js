@@ -1,3 +1,5 @@
+import styles from "./List.module.css";
+
 const List = ({ list, onRemoveItem }) => (
   <ul>
     {list.map((elem) => (
@@ -7,7 +9,7 @@ const List = ({ list, onRemoveItem }) => (
 );
 
 const Item = ({ item, onRemoveItem }) => (
-  <li className="item">
+  <li className={styles.item}>
     <span style={{ width: "40%" }}>
       <a href={item.url}>{item.title}</a>{" "}
     </span>

@@ -1,0 +1,13 @@
+.label {
+  padding-left: 5px;
+  font-size: 24px;
+}
+
+.input {
+  border: none;
+  border-bottom: 1px solid #171212;
+  background-color: transparent;
+  margin-right: 5px;
+
+  font-size: 24px;
+}

@@ -1,3 +1,5 @@
+import styles from "./InputWithLabel.module.css";
+
 const InputWithLabel = ({
   id,
   value,
@@ -7,14 +9,14 @@ const InputWithLabel = ({
 }) => {
   return (
     <>
-      <label htmlFor={id} className="label">
+      <label htmlFor={id} className={styles.label}>
         {children}
       </label>
       <input
         id={id}
         type={type}
         value={value}
-        className="input"
+        className={styles.input}
         onChange={onInputChange}
       />
     </>
