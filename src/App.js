@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import List from "./List";
+import InputWithLabel from "./InputWithLabel";
 
 const useSemiPersistentState = (key, initialValue) => {
   const [value, setValue] = useState(localStorage.getItem(key) || initialValue);
@@ -115,56 +117,5 @@ const App = () => {
     </div>
   );
 };
-
-const InputWithLabel = ({
-  id,
-  value,
-  type = "text",
-  onInputChange,
-  children,
-}) => {
-  return (
-    <>
-      <label htmlFor={id} className="label">
-        {children}
-      </label>
-      <input
-        id={id}
-        type={type}
-        value={value}
-        className="input"
-        onChange={onInputChange}
-      />
-    </>
-  );
-};
-
-const List = ({ list, onRemoveItem }) => (
-  <ul>
-    {list.map((elem) => (
-      <Item key={elem.objectID} item={elem} onRemoveItem={onRemoveItem} />
-    ))}
-  </ul>
-);
-
-const Item = ({ item, onRemoveItem }) => (
-  <li className="item">
-    <span style={{ width: "40%" }}>
-      <a href={item.url}>{item.title}</a>{" "}
-    </span>
-    <span style={{ width: "30%" }}>{item.author} </span>
-    <span style={{ width: "10%" }}>{item.num_comments} </span>
-    <span style={{ width: "10%" }}>{item.points}</span>
-    <span style={{ width: "10%" }}>
-      <button
-        type="button"
-        className="button button_small"
-        onClick={() => onRemoveItem(item)}
-      >
-        Dismiss
-      </button>
-    </span>
-  </li>
-);
 
 export default App;
